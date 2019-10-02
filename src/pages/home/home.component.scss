@@ -1,0 +1,17 @@
+@import "../../scss/variables.scss";
+
+:host {
+  height: 100%;
+  margin-top: 56px;
+
+  @media screen and (min-width: 599px) {
+    margin-top: 64px;
+  }
+
+  .overlay {
+    position: absolute;
+    width: 550px;
+    top: 75px;
+    left: 20px;
+  }
+}
