@@ -1,30 +1,30 @@
 # GeographicProfiling
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.6.
+El esqueleto del proyecto se ha generado con [Angular CLI](https://github.com/angular/angular-cli) version 8.3.6.
 
-## Development server
+## Dependencias necesarias para ejecutar la aplicación
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Node > 10 -> https://nodejs.org/es/
 
-## Code scaffolding
+## Preprocesos antes de ejecutar la aplicación
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Ir a la raiz del proyecto
+2. Ejecutar `npm install `
 
-## Build
+## Versión de desarrollo
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Ejecuta `npm run start` para ejecutar la version de desarrollo. Se abrerá el navegador que tengas por defecto en la url `http://localhost:4200/`. La aplicación se refrescara automaticamente si se cambia algo en el codigo fuente.
 
-## Running unit tests
+## Build a produccion
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Ejecuta `npm run browser:build` para hacer una build para producción. El codigo de distribución se encuentra en `dist/`.
 
-## Running end-to-end tests
+## NgRx
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+En el proyecto he utilizado NgRx para la gestión de los datos, esto no hubiese sido necesario ya que para aplicaciones pequeñas como esta creo que es demasiado verbose, sin embargo, creo que es una buena oportunidad para que veais el potencial que tiene si aun no lo habeis hecho :) así tambien podais ver como lo he implementado.
 
-## Further help
+Para que podais verlo de una forma mas visual, existe un plugin de chrome (desconozco si esta para otras) en el que te permite ver el estado de la store(donde se almacenan todos los datos de la aplicación) en todo momento e incluso de permite ver el arbol de datos. [Plugin Chrome](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=es)
+I 
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 
-https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=es
