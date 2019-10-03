@@ -1,0 +1,9 @@
+<agm-map *ngIf="mapCenter" [latitude]="mapCenter?.lat" [longitude]="mapCenter?.lng" [zoom]="9">
+  <agm-polygon strokeWeight="1" fillColor="#235e9c" strokeColor="#235e9c" *ngIf="currentMafiaMember"
+    [paths]="currentMafiaMember.related_bodies_found"></agm-polygon>
+  <agm-circle [radius]="1000" fillColor="#235e9c" fillOpacity="1" [latitude]="poiCenter?.lat"
+    [longitude]="poiCenter?.lng"></agm-circle>
+  <agm-circle [radius]="1000" fillColor="#e90606" fillOpacity="1"
+    *ngFor="let marker of currentMafiaMember?.related_bodies_found" [latitude]="marker.lat" [longitude]="marker.lng">
+  </agm-circle>
+</agm-map>

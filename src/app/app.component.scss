@@ -1,0 +1,27 @@
+@import "../scss/variables.scss";
+
+:host {
+  height: 100%;
+  mat-toolbar {
+    background-color: $white;
+    z-index: 1;
+    min-height: 56px;
+    position: fixed;
+    
+    .header-logo {
+      width: 50px;
+      height: 100%;
+      margin: 0 8px;
+      background-image: url("assets/img/logo-fbi.png");
+      background-position: center;
+      background-repeat: no-repeat; 
+      background-size: contain;
+    }
+
+    .header-title {
+      font-weight: bold;
+      color: $geo-yellow;
+      font-size: $font-size-xxxl
+    }
+  }
+}
