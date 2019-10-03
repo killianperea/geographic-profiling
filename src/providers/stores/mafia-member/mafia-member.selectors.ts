@@ -7,11 +7,16 @@ export const selectMafiaMemberState = createFeatureSelector<fromMafiaMemberReduc
 export const selectMafiaMemberEntities = createSelector(
     selectMafiaMemberState,
     fromMafiaMemberReducer.selectMafiaMemberEntities
-  );
+);
 
-export const selectFeatureCount = createSelector(
+export const selectCurrentUserId = createSelector(
+    selectMafiaMemberState,
+    fromMafiaMemberReducer.getSelectedMafiaMember
+);
+
+export const selectCurrentMafiaMember = createSelector(
     selectMafiaMemberEntities,
-    fromMafiaMemberReducer.getSelectedMafiaMember,
+    selectCurrentUserId,
     (mafiaMembersEntities, currentMafiaMember) => mafiaMembersEntities[currentMafiaMember]
 );
 
@@ -19,4 +24,4 @@ export const selectFeatureCount = createSelector(
 export const selectAllMafiaMember = createSelector(
     selectMafiaMemberState,
     fromMafiaMemberReducer.selectAllMafiaMember
-  );
+);

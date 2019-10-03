@@ -23,6 +23,9 @@ export const mafiaMemberReducer = createReducer(
     }),
     on(MafiaMembersActions.getMafiaMembersFailure, (state) => {
         return state;
+    }),
+    on(MafiaMembersActions.changeCurrentMafiaMember, (state, { mafiaMemberRef }) => {
+        return { ...state, currentMemberRef: mafiaMemberRef };
     })
 );
 

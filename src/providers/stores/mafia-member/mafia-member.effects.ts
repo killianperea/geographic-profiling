@@ -20,7 +20,10 @@ export class MafiaMemberEffects {
             ofType(MafiaMemberActions.getMafiaMembers),
             exhaustMap(action => {
                 return this.mafiaMemberApiService.getMafiaMembers().pipe(
-                    map((mafiaMembers) => MafiaMemberActions.getMafiaMembersSuccess({ mafiaMembers })),
+                    map((mafiaMembersFromService) => {
+                        const mafiaMembers = mafiaMembersFromService.sort((a, b) => b.dangerousness - a.dangerousness);
+                        return MafiaMemberActions.getMafiaMembersSuccess({ mafiaMembers })
+                    }),
                     catchError(() => of(MafiaMemberActions.getMafiaMembersFailure()))
                 )
             })

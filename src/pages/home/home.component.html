@@ -1,4 +1,4 @@
 <div fxFlex fxLayout="column">
-  <geo-information ngClass.gt-xs="overlay" fxFlex fxFlex.xs="60%"></geo-information>
+  <geo-information [mafiaMembers]="mafiaMembers$ | async" ngClass.gt-xs="overlay" fxFlex fxFlex.xs="60%"></geo-information>
   <geo-map fxFlex.xs="40%" fxFlex="100%"></geo-map>
 </div>

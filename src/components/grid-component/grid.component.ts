@@ -1,38 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 
 import { distinctUntilChanged } from 'rxjs/operators'
+import { MafiaMemberModel } from '@models/mafia-member.model';
+import { Subscription } from 'rxjs';
 
-
-const ELEMENT_DATA: any[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-];
-
+import { MafiaMemberState } from '@stores/mafia-member/mafia-member.reducer';
+import { Store, select } from '@ngrx/store';
+import * as fromMafiaMemberSelector from '@stores/mafia-member/mafia-member.selectors';
+import * as fromMafiaMemberActions from '@stores/mafia-member/mafia-member.actions';
 
 @Component({
   selector: 'geo-grid',
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
-export class GridComponent implements OnInit {
+export class GridComponent implements OnInit, OnDestroy {
+
+  private _mafiaMembers: MafiaMemberModel[];
+
+  @Input()
+  public set mafiaMembers(mafiaMembers: MafiaMemberModel[]) {
+    this._mafiaMembers = mafiaMembers;
+    this.dataSource = mafiaMembers;
+  };
+
   public displayedColumns: string[];
-  public dataSource = ELEMENT_DATA;
+
+  public dataSource: MafiaMemberModel[];
+
+  public selectedRowIndex: string;
+
+  private media$: Subscription;
+
+  private currentMafiaMember$: Subscription;
 
   constructor(
-    public mediaObserver: MediaObserver
+    public mediaObserver: MediaObserver,
+    public store: Store<MafiaMemberState>
   ) { }
 
   public ngOnInit() {
-    this.mediaObserver.media$
+    this.media$ = this.mediaObserver.media$
       .pipe(
         distinctUntilChanged((x: MediaChange, y: MediaChange) => x.mqAlias === y.mqAlias)
       ).subscribe((media: MediaChange) => {
@@ -41,8 +50,24 @@ export class GridComponent implements OnInit {
         if (media.mqAlias !== 'xs') {
           this.displayedColumns = ['mafiaMember', 'dangerousness', 'bodiesFound', 'location'];
         }
+      });
 
-      })
+    this.currentMafiaMember$ = this.store.pipe(select(fromMafiaMemberSelector.selectCurrentMafiaMember)).subscribe((mafiaMember) => {
+      this.selectedRowIndex = mafiaMember ? mafiaMember.ref : undefined;
+    });
+  }
+
+  public ngOnDestroy() {
+    this.media$.unsubscribe();
+    this.currentMafiaMember$.unsubscribe();
+  }
+
+  public get mafiaMembers() {
+    return this._mafiaMembers;
+  }
+
+  public onClickRow(row) {
+    this.store.dispatch(fromMafiaMemberActions.changeCurrentMafiaMember({ mafiaMemberRef: row.ref }));
   }
 
 }

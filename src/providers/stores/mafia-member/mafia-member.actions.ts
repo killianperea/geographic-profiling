@@ -15,3 +15,8 @@ export const getMafiaMembersSuccess = createAction(
 export const getMafiaMembersFailure = createAction(
     '[Mafia members] Get mafia members failure'
 );
+
+export const changeCurrentMafiaMember = createAction(
+    '[Mafia members] Change current mafia member',
+    props<{ mafiaMemberRef: string }>()
+);
