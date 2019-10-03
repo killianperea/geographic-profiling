@@ -22,6 +22,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@env';
 import { EffectsModule } from '@ngrx/effects';
+import { MafiaMemberStoreModule } from '@stores/mafia-member/mafia-member.module';
 
 
 
@@ -49,7 +50,10 @@ import { EffectsModule } from '@ngrx/effects';
       }
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+
+    /* Stores */
+    MafiaMemberStoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

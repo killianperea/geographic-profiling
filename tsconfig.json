@@ -23,7 +23,9 @@
       "@pages/*": ["pages/*"],
       "@config/*": ["core/config/*"],
       "@components/*": ["components/*"],
-      "@env": ["environments/environment"]
+      "@env": ["environments/environment"],
+      "@models/*": ["core/models/*"],
+      "@stores/*": ["providers/stores/*"]
     }
   },
   "angularCompilerOptions": {
