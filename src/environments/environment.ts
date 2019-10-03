@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  liquidBaseUrl: 'https://liquid.cat',
+  endpoints: {
+    mafiaMembers: '/code-tests/geo-profiling/api/mafia-members'
+  }
 };
 
 /*
